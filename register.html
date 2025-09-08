@@ -5,910 +5,776 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - MindPay</title>
     <link rel="icon" type="image/png" href="favicon.png" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        .form-label {
-            font-weight: 600;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .btn-primary {
-            background-color: #3C0775;
-            border-color: #3C0775;
-        }
-        .btn-primary:hover {
-            background-color: #7454AC;
-            border-color: #7454AC;
-        }
-        .btn-outline-primary {
-            color: #3C0775;
-            border-color: #3C0775;
-        }
-        .btn-outline-primary:hover {
-            background-color: #3C0775;
-            border-color: #3C0775;
-        }
-        .register-section {
-            background-color: #ffffff;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0.5rem;
-        }
-        .register-header {
-            background-color: #3c0775;
-            color: white;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            border-radius: 0.5rem;
-        }
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-        .step {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #e0e0e0;
-            color: #333;
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #3C0775 75%, #7454AC 100%);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 10px;
-            font-weight: bold;
+            overflow: hidden;
+            position: relative;
         }
-        .step.active {
-            background-color: #3C0775;
-            color: white;
+
+        /* Animated background particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
         }
-        .step-line {
-            width: 100px;
+
+        .particle {
+            position: absolute;
+            background: rgba(116, 84, 172, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 0.5s; }
+        .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-delay: 1.5s; }
+        .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Futuristic grid overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(116, 84, 172, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(116, 84, 172, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.1; }
+        }
+
+        /* Main container */
+        .register-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 450px;
+            padding: 0 20px;
+        }
+
+        /* Futuristic register card */
+        .futuristic-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(116, 84, 172, 0.3);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: cardGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes cardGlow {
+            0% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(116, 84, 172, 0.3); }
+            100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(116, 84, 172, 0.6); }
+        }
+
+        /* Card corner accents */
+        .futuristic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-top: 2px solid #7454AC;
+            border-left: 2px solid #7454AC;
+            border-radius: 20px 0 0 0;
+        }
+
+        .futuristic-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-bottom: 2px solid #7454AC;
+            border-right: 2px solid #7454AC;
+            border-radius: 0 0 20px 0;
+        }
+
+        /* Logo styling */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .logo-image {
+            max-width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(116, 84, 172, 0.5));
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .app-title {
+            font-family: 'Raleway', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(116, 84, 172, 0.8);
+            margin-top: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .register-title {
+            font-family: 'Raleway', monospace;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .register-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
             height: 2px;
-            background-color: #e0e0e0;
-            margin: 0 10px;
-            align-self: center;
+            background: linear-gradient(90deg, transparent, #7454AC, transparent);
         }
-        .step-line.active {
-            background-color: #3C0775;
+
+        /* Plan badge */
+        .plan-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #7454AC, #3C0775);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(116, 84, 172, 0.3);
         }
-        .form-text {
-            min-height: 20px; /* Reserve space for error messages */
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
         }
+
+        .form-label {
+            font-family: 'Raleway', monospace;
+            font-size: 0.9rem;
+            color: #7454AC;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .futuristic-input, .futuristic-select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(116, 84, 172, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .futuristic-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .futuristic-input:focus, .futuristic-select:focus {
+            outline: none;
+            border-color: #7454AC;
+            box-shadow: 
+                0 0 0 2px rgba(116, 84, 172, 0.2),
+                inset 0 0 20px rgba(116, 84, 172, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .futuristic-select option {
+            background: #2c2c2c;
+            color: #fff;
+        }
+
+        /* Futuristic buttons */
+        .futuristic-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #3C0775 0%, #7454AC 100%);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Raleway', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .futuristic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .futuristic-btn:hover::before {
+            left: 100%;
+        }
+
+        .futuristic-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 10px 25px rgba(60, 7, 117, 0.4),
+                0 0 20px rgba(116, 84, 172, 0.6);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .futuristic-btn:active {
+            transform: translateY(0);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(116, 84, 172, 0.5);
+            color: #7454AC;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(116, 84, 172, 0.2);
+            color: #fff;
+            border-color: #7454AC;
+        }
+
+        /* Button container */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .button-group .futuristic-btn {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        /* Loading animation */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            z-index: 100;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(116, 84, 172, 0.3);
+            border-top: 3px solid #7454AC;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive design */
         @media (max-width: 768px) {
-            .register-section {
-                padding: 1rem;
+            .futuristic-card {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
             }
-            .register-header {
-                padding: 0.3rem;
+
+            .app-title {
+                font-size: 1.5rem;
             }
+
+            .register-title {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Success/Error messages */
+        .message-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .futuristic-alert {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #7454AC;
+            border-radius: 12px;
+            padding: 1rem;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            margin-bottom: 0.5rem;
+            animation: slideInRight 0.3s ease;
+        }
+
+        .futuristic-alert.success {
+            border-color: #28a745;
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .futuristic-alert.error {
+            border-color: #dc3545;
+            box-shadow: 0 0 20px rgba(220, 53, 69, 0.3);
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Plan selection modal styles */
+        .plan-selection-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .plan-selection-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(116, 84, 172, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .plan-option {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(116, 84, 172, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .plan-option:hover {
+            background: rgba(116, 84, 172, 0.2);
+            border-color: #7454AC;
+        }
+
+        .plan-option.selected {
+            background: rgba(116, 84, 172, 0.3);
+            border-color: #7454AC;
+            box-shadow: 0 0 20px rgba(116, 84, 172, 0.4);
         }
     </style>
 </head>
 <body>
-    <div style="font-family: 'Roboto', sans-serif;" class="container-fluid mt-4">
-        <div class="register-header">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1 class="mb-0"><i class="fas fa-user-plus"></i> Register</h1>
-                <div>
-                    <img src="logo-reg.png" alt="MindPay Logo" class="img-fluid" style="max-height: 50px;">
-                </div>
-            </div>
-            <p class="mb-0 mt-2">Create your MindPay account in 3 simple steps</p>
-        </div>
+    <!-- Animated background -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <!-- Grid overlay -->
+    <div class="grid-overlay"></div>
 
-        <div class="step-indicator">
-            <div class="step active" id="step1-indicator">1</div>
-            <div class="step-line" id="line1-2"></div>
-            <div class="step" id="step2-indicator">2</div>
-            <div class="step-line" id="line2-3"></div>
-            <div class="step" id="step3-indicator">3</div>
-        </div>
+    <!-- Message container for alerts -->
+    <div class="message-container" id="messageContainer"></div>
 
-        <form id="registerForm">
-            <div class="register-section" id="step1">
-                <div class="row justify-content-center w-100">
-                    <div class="col-md-8 text-center">
-                         <h4 class="text-primary mb-3">Step 1: Account Information</h4>
-                    </div>
+    <!-- Plan Selection Modal -->
+    <div class="plan-selection-modal" id="planSelectionModal">
+        <div class="plan-selection-content">
+            <h3 style="color: #fff; margin-bottom: 1.5rem;">Choose Your Plan</h3>
+            <p style="color: #ccc; margin-bottom: 2rem;">Select a plan to continue with registration</p>
+            
+            <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                <div class="plan-option" data-plan="Free">
+                    <h4 style="color: #fff; margin-bottom: 1rem;">Free</h4>
+                    <p style="color: #ccc; font-size: 0.9rem;">Basic features for personal use</p>
                 </div>
-                <div class="row justify-content-center w-100">
-                    <div class="col-md-8 mb-3">
-                        <label for="userEmail" class="form-label">Email</label>
-                        <div class="position-relative">
-                            <input type="email" id="userEmail" class="form-control" required />
-                            <span id="emailValidationIcon" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 1.3em; display: none;">
-                                </span>
-                        </div>
-                        <div id="emailError" class="form-text text-danger"></div>
-                    </div>
-                </div>
-                <div class="row justify-content-center w-100">
-                    <div class="col-md-8 mb-3">
-                        <label for="newPassword" class="form-label">Password</label>
-                        <input type="password" id="newPassword" class="form-control" placeholder="A-z@#123 (8 characters)" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}" required />
-                        <div id="passwordStrengthBar" style="height: 8px; border-radius: 4px; margin-top: 6px; background: #e0e0e0;">
-                            <div id="passwordStrengthFill" style="height: 100%; width: 0%; background: #e74c3c; border-radius: 4px; transition: width 0.3s, background 0.3s;"></div>
-                        </div>
-                        <small id="passwordStrengthText" class="form-text"></small>
-                    </div>
-                </div>
-                <div class="row justify-content-center w-100">
-                    <div class="col-md-8 mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <div class="position-relative">
-                            <input type="password" id="confirmPassword" class="form-control" required />
-                            <span id="passwordMatchIcon" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 1.3em; color: #28a745; display: none;">
-                                <i class="fas fa-check-circle"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center w-100">
-                    <div class="col-md-8 text-end mb-3">
-                        <a href="index.html" class="btn btn-outline-secondary me-2">Home</a>
-                        <button type="button" class="btn btn-primary" id="nextStep1">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="register-section" id="step2" style="display: none;">
-                <h4 class="text-primary mb-3">Step 2: Personal Information</h4>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="firstname" class="form-label">First Name</label>
-                        <input type="text" id="firstname" class="form-control">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="lastname" class="form-label">Last Name</label>
-                        <input type="text" id="lastname" class="form-control">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="phone" class="form-label">Mobile Number</label>
-                        <input type="tel" id="phone" class="form-control">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="profession" class="form-label">Profession</label>
-                        <select id="profession" class="form-select" required>
-                            <option value="">Select Profession</option>
-                            <option value="Student">Student</option>
-                            <option value="Employed">Employed</option>
-                            <option value="Self-Employed">Self-Employed</option>
-                            <option value="Business Owner">Business Owner</option>
-                            <option value="Freelancer">Freelancer</option>
-                            <option value="Retired">Retired</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="ageRange" class="form-label">Age Range</label>
-                        <select id="ageRange" class="form-select" required>
-                            <option value="">Select Age Range</option>
-                            <option value="18-25">18-25</option>
-                            <option value="26-35">26-35</option>
-                            <option value="36-45">36-45</option>
-                            <option value="46-55">46-55</option>
-                            <option value="56-65">56-65</option>
-                            <option value="65+">65+</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="country" class="form-label">Country</label>
-                        <select id="country" class="form-select" required>
-                            <option value="">Select Country</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="currency" class="form-label">Currency</label>
-                        <select id="currency" class="form-select" required>
-                            <option value="">Select currency</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="incomeRange" class="form-label">Monthly Income Range</label>
-                        <select id="incomeRange" class="form-select" required>
-                            <option value="">Select Income Range</option>
-                            <option value="0-50000">0 - 50,000</option>
-                            <option value="50001-100000">50,001 - 100,000</option>
-                            <option value="100001-200000">100,001 - 200,000</option>
-                            <option value="200001-500000">200,001 - 500,000</option>
-                            <option value="500001-1000000">500,001 - 1,000,000</option>
-                            <option value="1000000+">1,000,000+</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="cycleDate" class="form-label">Cycle Date</label>
-                        <select id="cycleDate" class="form-select" required>
-                            <option value="">Select Cycle Date</option>
-                            <option value="1">1st</option>
-                            <option value="5">5th</option>
-                            <option value="10">10th</option>
-                            <option value="15">15th</option>
-                            <option value="20">20th</option>
-                            <option value="25">25th</option>
-                            <option value="30">30th</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="civilStatus" class="form-label">Civil Status</label>
-                        <select id="civilStatus" class="form-select">
-                            <option value="">Select Civil Status</option>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widowed">Widowed</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="children" class="form-label">Number of Children</label>
-                        <input type="number" id="children" class="form-control" min="0">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="livingType" class="form-label">Living Type</label>
-                        <select id="livingType" class="form-select">
-                            <option value="">Select Living Type</option>
-                            <option value="Rented">Rented</option>
-                            <option value="Owned">Owned</option>
-                            <option value="Leased">Leased</option>
-                            <option value="With Parents">With Parents</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="vehicleOwned" class="form-label">Vehicle Owned</label>
-                        <select id="vehicleOwned" class="form-select">
-                            <option value="">Select an option</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 mb-3" id="fuelTypeContainer" style="display: none;">
-                        <label for="fuelType" class="form-label">Fuel Type</label>
-                        <select id="fuelType" class="form-select">
-                            <option value="">Select Fuel Type</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="Diesel">Diesel</option>
-                            <option value="Electric">Electric</option>
-                            <option value="Hybrid">Hybrid</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <label for="interests" class="form-label">Interests</label>
-                        <textarea id="interests" class="form-control" rows="3" placeholder="e.g., Reading, Traveling, Sports"></textarea>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-outline-primary" id="prevStep2">
-                        <i class="fas fa-arrow-left"></i> Previous
-                    </button>
-                    <button type="button" class="btn btn-primary" id="nextStep2">
-                        Next <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="register-section" id="step3" style="display: none;">
-                <h4 class="text-primary mb-3">Step 3: Categories</h4>
                 
-                <div class="mb-4">
-                    <h5 class="text-primary mb-2"><i class="fas fa-arrow-up text-success"></i> Income Categories</h5>
-                    <p class="text-muted mb-2">Select the income categories you want to track</p>
-                    <div class="border rounded p-3" style="max-height: 300px; overflow-y: auto;">
-                        <div id="incomeCategoriesList" class="row"></div>
-                    </div>
-                    <div class="mt-3">
-                        <div class="input-group">
-                            <input type="text" id="customIncomeCategory" class="form-control" placeholder="Add custom income category">
-                            <button class="btn btn-outline-primary" type="button" id="addIncomeCategoryBtn">
-                                <i class="fas fa-plus"></i> Add
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <h5 class="text-primary mb-2"><i class="fas fa-arrow-down text-danger"></i> Expense Categories</h5>
-                    <p class="text-muted mb-2">Select the expense categories you want to track</p>
-                    <div class="border rounded p-3" style="max-height: 300px; overflow-y: auto;">
-                        <div id="expenseCategoriesList" class="row"></div>
-                    </div>
-                    <div class="mt-3">
-                        <div class="input-group">
-                            <input type="text" id="customExpenseCategory" class="form-control" placeholder="Add custom expense category">
-                            <button class="btn btn-outline-primary" type="button" id="addExpenseCategoryBtn">
-                                <i class="fas fa-plus"></i> Add
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-outline-primary" id="prevStep3">
-                        <i class="fas fa-arrow-left"></i> Previous
-                    </button>
-                    <div class="form-check me-3">
-                        <input class="form-check-input" type="checkbox" id="acceptTerms" />
-                        <label class="form-check-label" for="acceptTerms">
-                            Accept <a href="terms-conditions.html" target="_blank">Terms &amp; Conditions</a>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="completeRegistrationBtn" disabled>
-                        <i class="fas fa-user-plus"></i> Complete Registration
-                    </button>
+                <div class="plan-option" data-plan="Pro">
+                    <h4 style="color: #fff; margin-bottom: 1rem;">Pro</h4>
+                    <p style="color: #ccc; font-size: 0.9rem;">Advanced features and analytics</p>
                 </div>
             </div>
-        </form>
+            
+            <button id="confirmPlanBtn" class="futuristic-btn" style="width: auto; padding: 0.75rem 2rem; margin-bottom: 0.5rem;" disabled>Continue</button>
+            <br>
+            <button onclick="window.location.href='index.html'" class="secondary-btn" style="width: auto; padding: 0.5rem 1rem; margin-bottom: 0;">Cancel</button>
+        </div>
+    </div>
+
+    <div class="register-container">
+        <div class="futuristic-card">
+            <!-- Loading overlay -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner"></div>
+            </div>
+
+            <!-- Logo and title -->
+            <div class="logo-container">
+                <img src="logo-login.png" alt="MindPay Logo" class="logo-image">
+                <div class="app-title">MindPay</div>
+            </div>
+
+            <!-- Plan badge (will be shown after plan selection) -->
+            <div id="planBadge" class="plan-badge" style="display: none;"></div>
+
+            <!-- Register title -->
+            <h2 class="register-title">Register</h2>
+
+            <!-- Register form -->
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" id="firstName" class="futuristic-input" 
+                           placeholder="Enter your first name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" id="lastName" class="futuristic-input" 
+                           placeholder="Enter your last name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="futuristic-input" 
+                           placeholder="Enter your email" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="futuristic-input" 
+                           placeholder="Create a password" required minlength="6" />
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="futuristic-input" 
+                           placeholder="Confirm your password" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="country" class="form-label">Country</label>
+                    <select id="country" class="futuristic-select" required>
+                        <option value="">Select your country</option>
+                        <option value="Sri Lanka">Sri Lanka</option>
+                        <option value="India">India</option>
+                        <option value="United States">United States</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="France">France</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="currency" class="form-label">Currency</label>
+                    <select id="currency" class="futuristic-select" required>
+                        <option value="">Select your currency</option>
+                        <option value="LKR">Sri Lankan Rupee (LKR)</option>
+                        <option value="USD">US Dollar (USD)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                        <option value="GBP">British Pound (GBP)</option>
+                        <option value="INR">Indian Rupee (INR)</option>
+                        <option value="CAD">Canadian Dollar (CAD)</option>
+                        <option value="AUD">Australian Dollar (AUD)</option>
+                        <option value="JPY">Japanese Yen (JPY)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="futuristic-btn">
+                    Create Account
+                </button>
+            </form>
+
+            <!-- Navigation buttons -->
+            <div class="button-group">
+                <a href="index.html" class="futuristic-btn secondary-btn">
+                    Home
+                </a>
+                <a href="login.html" class="futuristic-btn secondary-btn">
+                    Login
+                </a>
+            </div>
+        </div>
     </div>
 
     <script type="module">
-        import { auth, db } from './firebase-config.js';
-        import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        // Import Firebase functions
+        import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { auth, db } from "./firebase-config.js";
 
-        // --- DOM Elements ---
-        const step1 = document.getElementById('step1');
-        const step2 = document.getElementById('step2');
-        const step3 = document.getElementById('step3');
-        const registerForm = document.getElementById('registerForm');
-        
-        const step1Indicator = document.getElementById('step1-indicator');
-        const step2Indicator = document.getElementById('step2-indicator');
-        const step3Indicator = document.getElementById('step3-indicator');
-        const line1_2 = document.getElementById('line1-2');
-        const line2_3 = document.getElementById('line2-3');
-        const userEmailInput = document.getElementById('userEmail');
-        const emailValidationIcon = document.getElementById('emailValidationIcon');
-        const emailError = document.getElementById('emailError');
+        let selectedUserType = null;
 
-        // --- State Variables ---
-        let customIncomeCategoriesState = [];
-        let customExpenseCategoriesState = [];
-        
-        // --- Local Country and Currency Data ---
-        const allCountriesData = [
-            { name: "Afghanistan", currencies: { AFN: { name: "Afghan afghani", symbol: "؋" } } },
-            { name: "Åland Islands", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Albania", currencies: { ALL: { name: "Albanian lek", symbol: "L" } } },
-            { name: "Algeria", currencies: { DZD: { name: "Algerian dinar", symbol: "د.ج" } } },
-            { name: "American Samoa", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Andorra", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Angola", currencies: { AOA: { name: "Angolan kwanza", symbol: "Kz" } } },
-            { name: "Anguilla", currencies: { XCD: { name: "East Caribbean dollar", symbol: "$" } } },
-            { name: "Antarctica", currencies: {} },
-            { name: "Antigua and Barbuda", currencies: { XCD: { name: "East Caribbean dollar", symbol: "$" } } },
-            { name: "Argentina", currencies: { ARS: { name: "Argentine peso", symbol: "$" } } },
-            { name: "Armenia", currencies: { AMD: { name: "Armenian dram", symbol: "֏" } } },
-            { name: "Aruba", currencies: { AWG: { name: "Aruban florin", symbol: "ƒ" } } },
-            { name: "Australia", currencies: { AUD: { name: "Australian dollar", symbol: "$" } } },
-            { name: "Austria", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Azerbaijan", currencies: { AZN: { name: "Azerbaijani manat", symbol: "₼" } } },
-            { name: "Bahamas", currencies: { BSD: { name: "Bahamian dollar", symbol: "$" } } },
-            { name: "Bahrain", currencies: { BHD: { name: "Bahraini dinar", symbol: ".د.ب" } } },
-            { name: "Bangladesh", currencies: { BDT: { name: "Bangladeshi taka", symbol: "৳" } } },
-            { name: "Barbados", currencies: { BBD: { name: "Barbadian dollar", symbol: "$" } } },
-            { name: "Belarus", currencies: { BYN: { name: "Belarusian ruble", symbol: "Br" } } },
-            { name: "Belgium", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Belize", currencies: { BZD: { name: "Belize dollar", symbol: "$" } } },
-            { name: "Benin", currencies: { XOF: { name: "West African CFA franc", symbol: "Fr" } } },
-            { name: "Bermuda", currencies: { BMD: { name: "Bermudian dollar", symbol: "$" } } },
-            { name: "Bhutan", currencies: { BTN: { name: "Bhutanese ngultrum", symbol: "Nu." } } },
-            { name: "Bolivia", currencies: { BOB: { name: "Bolivian boliviano", symbol: "Bs." } } },
-            { name: "Bosnia and Herzegovina", currencies: { BAM: { name: "Bosnia and Herzegovina convertible mark", symbol: "KM" } } },
-            { name: "Botswana", currencies: { BWP: { name: "Botswana pula", symbol: "P" } } },
-            { name: "Brazil", currencies: { BRL: { name: "Brazilian real", symbol: "R$" } } },
-            { name: "British Indian Ocean Territory", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "British Virgin Islands", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Brunei", currencies: { BND: { name: "Brunei dollar", symbol: "$" } } },
-            { name: "Bulgaria", currencies: { BGN: { name: "Bulgarian lev", symbol: "лв" } } },
-            { name: "Burkina Faso", currencies: { XOF: { name: "West African CFA franc", symbol: "Fr" } } },
-            { name: "Burundi", currencies: { BIF: { name: "Burundian franc", symbol: "Fr" } } },
-            { name: "Cambodia", currencies: { KHR: { name: "Cambodian riel", symbol: "៛" } } },
-            { name: "Cameroon", currencies: { XAF: { name: "Central African CFA franc", symbol: "Fr" } } },
-            { name: "Canada", currencies: { CAD: { name: "Canadian dollar", symbol: "$" } } },
-            { name: "Cape Verde", currencies: { CVE: { name: "Cape Verdean escudo", symbol: "Esc" } } },
-            { name: "Cayman Islands", currencies: { KYD: { name: "Cayman Islands dollar", symbol: "$" } } },
-            { name: "Central African Republic", currencies: { XAF: { name: "Central African CFA franc", symbol: "Fr" } } },
-            { name: "Chad", currencies: { XAF: { name: "Central African CFA franc", symbol: "Fr" } } },
-            { name: "Chile", currencies: { CLP: { name: "Chilean peso", symbol: "$" } } },
-            { name: "China", currencies: { CNY: { name: "Chinese yuan", symbol: "¥" } } },
-            { name: "Colombia", currencies: { COP: { name: "Colombian peso", symbol: "$" } } },
-            { name: "Comoros", currencies: { KMF: { name: "Comorian franc", symbol: "Fr" } } },
-            { name: "Congo", currencies: { XAF: { name: "Central African CFA franc", symbol: "Fr" } } },
-            { name: "Cook Islands", currencies: { CKD: { name: "Cook Islands dollar", symbol: "$" }, NZD: { name: "New Zealand dollar", symbol: "$" } } },
-            { name: "Costa Rica", currencies: { CRC: { name: "Costa Rican colón", symbol: "₡" } } },
-            { name: "Croatia", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Cuba", currencies: { CUP: { name: "Cuban peso", symbol: "$" } } },
-            { name: "Cyprus", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Czechia", currencies: { CZK: { name: "Czech koruna", symbol: "Kč" } } },
-            { name: "Denmark", currencies: { DKK: { name: "Danish krone", symbol: "kr" } } },
-            { name: "Djibouti", currencies: { DJF: { name: "Djiboutian franc", symbol: "Fr" } } },
-            { name: "Dominica", currencies: { XCD: { name: "East Caribbean dollar", symbol: "$" } } },
-            { name: "Dominican Republic", currencies: { DOP: { name: "Dominican peso", symbol: "$" } } },
-            { name: "Ecuador", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Egypt", currencies: { EGP: { name: "Egyptian pound", symbol: "£" } } },
-            { name: "El Salvador", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Equatorial Guinea", currencies: { XAF: { name: "Central African CFA franc", symbol: "Fr" } } },
-            { name: "Eritrea", currencies: { ERN: { name: "Eritrean nakfa", symbol: "Nfk" } } },
-            { name: "Estonia", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Eswatini", currencies: { SZL: { name: "Swazi lilangeni", symbol: "L" } } },
-            { name: "Ethiopia", currencies: { ETB: { name: "Ethiopian birr", symbol: "Br" } } },
-            { name: "Falkland Islands", currencies: { FKP: { name: "Falkland Islands pound", symbol: "£" } } },
-            { name: "Faroe Islands", currencies: { DKK: { name: "Danish krone", symbol: "kr" } } },
-            { name: "Fiji", currencies: { FJD: { name: "Fijian dollar", symbol: "$" } } },
-            { name: "Finland", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "France", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Gabon", currencies: { XAF: { name: "Central African CFA franc", symbol: "Fr" } } },
-            { name: "Gambia", currencies: { GMD: { name: "Gambian dalasi", symbol: "D" } } },
-            { name: "Georgia", currencies: { GEL: { name: "Georgian lari", symbol: "₾" } } },
-            { name: "Germany", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Ghana", currencies: { GHS: { name: "Ghanaian cedi", symbol: "₵" } } },
-            { name: "Gibraltar", currencies: { GIP: { name: "Gibraltar pound", symbol: "£" } } },
-            { name: "Greece", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Greenland", currencies: { DKK: { name: "Danish krone", symbol: "kr" } } },
-            { name: "Grenada", currencies: { XCD: { name: "East Caribbean dollar", symbol: "$" } } },
-            { name: "Guatemala", currencies: { GTQ: { name: "Guatemalan quetzal", symbol: "Q" } } },
-            { name: "Guernsey", currencies: { GGP: { name: "Guernsey pound", symbol: "£" } } },
-            { name: "Guinea", currencies: { GNF: { name: "Guinean franc", symbol: "Fr" } } },
-            { name: "Guyana", currencies: { GYD: { name: "Guyanese dollar", symbol: "$" } } },
-            { name: "Haiti", currencies: { HTG: { name: "Haitian gourde", symbol: "G" } } },
-            { name: "Honduras", currencies: { HNL: { name: "Honduran lempira", symbol: "L" } } },
-            { name: "Hong Kong", currencies: { HKD: { name: "Hong Kong dollar", symbol: "$" } } },
-            { name: "Hungary", currencies: { HUF: { name: "Hungarian forint", symbol: "Ft" } } },
-            { name: "Iceland", currencies: { ISK: { name: "Icelandic króna", symbol: "kr" } } },
-            { name: "India", currencies: { INR: { name: "Indian rupee", symbol: "₹" } } },
-            { name: "Indonesia", currencies: { IDR: { name: "Indonesian rupiah", symbol: "Rp" } } },
-            { name: "Iran", currencies: { IRR: { name: "Iranian rial", symbol: "﷼" } } },
-            { name: "Iraq", currencies: { IQD: { name: "Iraqi dinar", symbol: "ع.د" } } },
-            { name: "Ireland", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Isle of Man", currencies: { IMP: { name: "Manx pound", symbol: "£" } } },
-            { name: "Israel", currencies: { ILS: { name: "Israeli new shekel", symbol: "₪" } } },
-            { name: "Italy", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Jamaica", currencies: { JMD: { name: "Jamaican dollar", symbol: "$" } } },
-            { name: "Japan", currencies: { JPY: { name: "Japanese yen", symbol: "¥" } } },
-            { name: "Jersey", currencies: { JEP: { name: "Jersey pound", symbol: "£" } } },
-            { name: "Jordan", currencies: { JOD: { name: "Jordanian dinar", symbol: "د.ا" } } },
-            { name: "Kazakhstan", currencies: { KZT: { name: "Kazakhstani tenge", symbol: "₸" } } },
-            { name: "Kenya", currencies: { KES: { name: "Kenyan shilling", symbol: "Sh" } } },
-            { name: "Kiribati", currencies: { KID: { name: "Kiribati dollar", symbol: "$" } } },
-            { name: "Kuwait", currencies: { KWD: { name: "Kuwaiti dinar", symbol: "د.ك" } } },
-            { name: "Kyrgyzstan", currencies: { KGS: { name: "Kyrgyzstani som", symbol: "с" } } },
-            { name: "Laos", currencies: { LAK: { name: "Lao kip", symbol: "₭" } } },
-            { name: "Latvia", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Lebanon", currencies: { LBP: { name: "Lebanese pound", symbol: "ل.ل" } } },
-            { name: "Lesotho", currencies: { LSL: { name: "Lesotho loti", symbol: "L" } } },
-            { name: "Liberia", currencies: { LRD: { name: "Liberian dollar", symbol: "$" } } },
-            { name: "Libya", currencies: { LYD: { name: "Libyan dinar", symbol: "ل.د" } } },
-            { name: "Liechtenstein", currencies: { CHF: { name: "Swiss franc", symbol: "Fr" } } },
-            { name: "Lithuania", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Luxembourg", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Macau", currencies: { MOP: { name: "Macanese pataca", symbol: "P" } } },
-            { name: "Madagascar", currencies: { MGA: { name: "Malagasy ariary", symbol: "Ar" } } },
-            { name: "Malawi", currencies: { MWK: { name: "Malawian kwacha", symbol: "MK" } } },
-            { name: "Malaysia", currencies: { MYR: { name: "Malaysian ringgit", symbol: "RM" } } },
-            { name: "Maldives", currencies: { MVR: { name: "Maldivian rufiyaa", symbol: ".ރ" } } },
-            { name: "Mali", currencies: { XOF: { name: "West African CFA franc", symbol: "Fr" } } },
-            { name: "Malta", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Marshall Islands", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Mauritania", currencies: { MRU: { name: "Mauritanian ouguiya", symbol: "UM" } } },
-            { name: "Mauritius", currencies: { MUR: { name: "Mauritian rupee", symbol: "₨" } } },
-            { name: "Mexico", currencies: { MXN: { name: "Mexican peso", symbol: "$" } } },
-            { name: "Micronesia", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Moldova", currencies: { MDL: { name: "Moldovan leu", symbol: "L" } } },
-            { name: "Monaco", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Mongolia", currencies: { MNT: { name: "Mongolian tögrög", symbol: "₮" } } },
-            { name: "Montenegro", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Montserrat", currencies: { XCD: { name: "East Caribbean dollar", symbol: "$" } } },
-            { name: "Morocco", currencies: { MAD: { name: "Moroccan dirham", symbol: "د.م." } } },
-            { name: "Mozambique", currencies: { MZN: { name: "Mozambican metical", symbol: "MT" } } },
-            { name: "Myanmar", currencies: { MMK: { name: "Burmese kyat", symbol: "Ks" } } },
-            { name: "Namibia", currencies: { NAD: { name: "Namibian dollar", symbol: "$" } } },
-            { name: "Nauru", currencies: { AUD: { name: "Australian dollar", symbol: "$" } } },
-            { name: "Nepal", currencies: { NPR: { name: "Nepalese rupee", symbol: "₨" } } },
-            { name: "Netherlands", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "New Caledonia", currencies: { XPF: { name: "CFP franc", symbol: "Fr" } } },
-            { name: "New Zealand", currencies: { NZD: { name: "New Zealand dollar", symbol: "$" } } },
-            { name: "Nicaragua", currencies: { NIO: { name: "Nicaraguan córdoba", symbol: "C$" } } },
-            { name: "Niger", currencies: { XOF: { name: "West African CFA franc", symbol: "Fr" } } },
-            { name: "Nigeria", currencies: { NGN: { name: "Nigerian naira", symbol: "₦" } } },
-            { name: "North Korea", currencies: { KPW: { name: "North Korean won", symbol: "₩" } } },
-            { name: "North Macedonia", currencies: { MKD: { name: "Macedonian denar", symbol: "ден" } } },
-            { name: "Norway", currencies: { NOK: { name: "Norwegian krone", symbol: "kr" } } },
-            { name: "Oman", currencies: { OMR: { name: "Omani rial", symbol: "ر.ع." } } },
-            { name: "Pakistan", currencies: { PKR: { name: "Pakistani rupee", symbol: "₨" } } },
-            { name: "Palau", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Palestine", currencies: { ILS: { name: "Israeli new shekel", symbol: "₪" } } },
-            { name: "Panama", currencies: { PAB: { name: "Panamanian balboa", symbol: "B/." } } },
-            { name: "Papua New Guinea", currencies: { PGK: { name: "Papua New Guinean kina", symbol: "K" } } },
-            { name: "Paraguay", currencies: { PYG: { name: "Paraguayan guaraní", symbol: "₲" } } },
-            { name: "Peru", currencies: { PEN: { name: "Peruvian sol", symbol: "S/ " } } },
-            { name: "Philippines", currencies: { PHP: { name: "Philippine peso", symbol: "₱" } } },
-            { name: "Poland", currencies: { PLN: { name: "Polish złoty", symbol: "zł" } } },
-            { name: "Portugal", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Puerto Rico", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Qatar", currencies: { QAR: { name: "Qatari riyal", symbol: "ر.ق" } } },
-            { name: "Romania", currencies: { RON: { name: "Romanian leu", symbol: "lei" } } },
-            { name: "Russia", currencies: { RUB: { name: "Russian ruble", symbol: "₽" } } },
-            { name: "Rwanda", currencies: { RWF: { name: "Rwandan franc", symbol: "Fr" } } },
-            { name: "Saint Kitts and Nevis", currencies: { XCD: { name: "East Caribbean dollar", symbol: "$" } } },
-            { name: "Saint Lucia", currencies: { XCD: { name: "East Caribbean dollar", symbol: "$" } } },
-            { name: "Saint Vincent and the Grenadines", currencies: { XCD: { name: "East Caribbean dollar", symbol: "$" } } },
-            { name: "Samoa", currencies: { WST: { name: "Samoan tālā", symbol: "T" } } },
-            { name: "San Marino", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Sao Tome and Principe", currencies: { STN: { name: "São Tomé and Príncipe dobra", symbol: "Db" } } },
-            { name: "Saudi Arabia", currencies: { SAR: { name: "Saudi riyal", symbol: "ر.س" } } },
-            { name: "Senegal", currencies: { XOF: { name: "West African CFA franc", symbol: "Fr" } } },
-            { name: "Serbia", currencies: { RSD: { name: "Serbian dinar", symbol: "дин." } } },
-            { name: "Seychelles", currencies: { SCR: { name: "Seychellois rupee", symbol: "₨" } } },
-            { name: "Sierra Leone", currencies: { SLL: { name: "Sierra Leonean leone", symbol: "Le" } } },
-            { name: "Singapore", currencies: { SGD: { name: "Singapore dollar", symbol: "$" } } },
-            { name: "Slovakia", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Slovenia", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Solomon Islands", currencies: { SBD: { name: "Solomon Islands dollar", symbol: "$" } } },
-            { name: "Somalia", currencies: { SOS: { name: "Somali shilling", symbol: "Sh" } } },
-            { name: "South Africa", currencies: { ZAR: { name: "South African rand", symbol: "R" } } },
-            { name: "South Korea", currencies: { KRW: { name: "South Korean won", symbol: "₩" } } },
-            { name: "South Sudan", currencies: { SSP: { name: "South Sudanese pound", symbol: "£" } } },
-            { name: "Spain", currencies: { EUR: { name: "Euro", symbol: "€" } } },
-            { name: "Sri Lanka", currencies: { LKR: { name: "Sri Lankan rupee", symbol: "Rs" } } },
-            { name: "Sudan", currencies: { SDG: { name: "Sudanese pound", symbol: "ج.س." } } },
-            { name: "Suriname", currencies: { SRD: { name: "Surinamese dollar", symbol: "$" } } },
-            { name: "Sweden", currencies: { SEK: { name: "Swedish krona", symbol: "kr" } } },
-            { name: "Switzerland", currencies: { CHF: { name: "Swiss franc", symbol: "Fr" } } },
-            { name: "Syria", currencies: { SYP: { name: "Syrian pound", symbol: "£" } } },
-            { name: "Taiwan", currencies: { TWD: { name: "New Taiwan dollar", symbol: "$" } } },
-            { name: "Tanzania", currencies: { TZS: { name: "Tanzanian shilling", symbol: "Sh" } } },
-            { name: "Thailand", currencies: { THB: { name: "Thai baht", symbol: "฿" } } },
-            { name: "Timor-Leste", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Togo", currencies: { XOF: { name: "West African CFA franc", symbol: "Fr" } } },
-            { name: "Tonga", currencies: { TOP: { name: "Tongan paʻanga", symbol: "T$" } } },
-            { name: "Trinidad and Tobago", currencies: { TTD: { name: "Trinidad and Tobago dollar", symbol: "$" } } },
-            { name: "Tunisia", currencies: { TND: { name: "Tunisian dinar", symbol: "د.ت" } } },
-            { name: "Turkey", currencies: { TRY: { name: "Turkish lira", symbol: "₺" } } },
-            { name: "Turkmenistan", currencies: { TMT: { name: "Turkmenistan manat", symbol: "m" } } },
-            { name: "Tuvalu", currencies: { AUD: { name: "Australian dollar", symbol: "$" } } },
-            { name: "Uganda", currencies: { UGX: { name: "Ugandan shilling", symbol: "Sh" } } },
-            { name: "Ukraine", currencies: { UAH: { name: "Ukrainian hryvnia", symbol: "₴" } } },
-            { name: "United Arab Emirates", currencies: { AED: { name: "United Arab Emirates dirham", symbol: "د.إ" } } },
-            { name: "United Kingdom", currencies: { GBP: { name: "British pound", symbol: "£" } } },
-            { name: "United States", currencies: { USD: { name: "United States dollar", symbol: "$" } } },
-            { name: "Uruguay", currencies: { UYU: { name: "Uruguayan peso", symbol: "$" } } },
-            { name: "Uzbekistan", currencies: { UZS: { name: "Uzbekistani soʻm", symbol: "so'm" } } },
-            { name: "Vanuatu", currencies: { VUV: { name: "Vanuatu vatu", symbol: "Vt" } } },
-            { name: "Venezuela", currencies: { VES: { name: "Venezuelan bolívar soberano", symbol: "Bs." } } },
-            { name: "Vietnam", currencies: { VND: { name: "Vietnamese đồng", symbol: "₫" } } },
-            { name: "Yemen", currencies: { YER: { name: "Yemeni rial", symbol: "﷼" } } },
-            { name: "Zambia", currencies: { ZMW: { name: "Zambian kwacha", symbol: "ZK" } } },
-            { name: "Zimbabwe", currencies: { ZWL: { name: "Zimbabwean dollar", symbol: "$" } } }
-        ];
+        // Check URL parameters for user type
+        function checkURLParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userType = urlParams.get('type');
+            
+            if (userType && (userType === 'Free' || userType === 'Pro')) {
+                selectedUserType = userType;
+                showPlanBadge(userType);
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else {
+                // Show plan selection modal if no valid type in URL
+                showPlanSelectionModal();
+            }
+        }
 
-        // --- Country and Currency Logic ---
-        function populateCountries() {
-            allCountriesData.sort((a, b) => a.name.localeCompare(b.name));
-            const countrySelect = document.getElementById('country');
-            allCountriesData.forEach(country => {
-                const option = document.createElement('option');
-                option.value = country.name;
-                option.textContent = country.name;
-                countrySelect.appendChild(option);
+        // Show plan badge
+        function showPlanBadge(planType) {
+            const badge = document.getElementById('planBadge');
+            badge.textContent = `${planType} Plan`;
+            badge.style.display = 'block';
+        }
+
+        // Show plan selection modal
+        function showPlanSelectionModal() {
+            const modal = document.getElementById('planSelectionModal');
+            modal.style.display = 'flex';
+            
+            // Add click handlers for plan options
+            const planOptions = document.querySelectorAll('.plan-option');
+            const confirmBtn = document.getElementById('confirmPlanBtn');
+            
+            planOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    planOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Enable confirm button
+                    confirmBtn.disabled = false;
+                    // Store selected plan
+                    selectedUserType = option.dataset.plan;
+                });
+            });
+            
+            confirmBtn.addEventListener('click', () => {
+                if (selectedUserType) {
+                    modal.style.display = 'none';
+                    showPlanBadge(selectedUserType);
+                }
             });
         }
 
-        document.getElementById('country').addEventListener('change', (e) => {
-            const selectedCountryName = e.target.value;
-            const currencySelect = document.getElementById('currency');
-            currencySelect.innerHTML = '<option value="">Select Currency</option>'; 
-            if (selectedCountryName) {
-                const countryData = allCountriesData.find(c => c.name === selectedCountryName);
-                if (countryData && countryData.currencies) {
-                    for (const code in countryData.currencies) {
-                        const currency = countryData.currencies[code];
-                        const option = document.createElement('option');
-                        option.value = code;
-                        option.textContent = `${code} (${currency.symbol || 'N/A'}) - ${currency.name}`;
-                        currencySelect.appendChild(option);
+        // Show futuristic message
+        function showMessage(text, type = 'success') {
+            const container = document.getElementById('messageContainer');
+            const alert = document.createElement('div');
+            alert.className = `futuristic-alert ${type}`;
+            alert.textContent = text;
+            container.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.style.animation = 'slideInRight 0.3s ease reverse';
+                setTimeout(() => {
+                    if (container.contains(alert)) {
+                        container.removeChild(alert);
                     }
-                    if (currencySelect.options.length > 1) {
-                        currencySelect.selectedIndex = 1;
-                    }
-                }
+                }, 300);
+            }, 3000);
+        }
+
+        // Show loading state
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.style.display = show ? 'flex' : 'none';
+        }
+
+        // Validate password match
+        function validatePasswords() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match', 'error');
+                return false;
             }
-        });
-
-        // --- CORRECTED Email Validation Function ---
-        async function validateEmailUniqueness() {
-            const email = userEmailInput.value.trim();
-            emailValidationIcon.style.display = 'none';
-            emailError.textContent = ''; // Clear previous errors
-
-            if (!email) {
-                return; // Do nothing if the field is empty
-            }
-
-            // 1. Check for valid email format first
-            if (!/^\S+@\S+\.\S+$/.test(email)) {
-                emailError.textContent = 'Please enter a valid email address.';
-                emailValidationIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
-                emailValidationIcon.style.color = '#dc3545'; // Red
-                emailValidationIcon.style.display = 'inline';
-                return; // Stop if format is invalid
-            }
-
-            // 2. If format is valid, check for uniqueness
-            emailValidationIcon.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            emailValidationIcon.style.color = '#6c757d'; // Neutral color for spinner
-            emailValidationIcon.style.display = 'inline';
-
-            try {
-                const methods = await fetchSignInMethodsForEmail(auth, email);
-                if (methods.length === 0) {
-                    // Email is unique and available
-                    emailValidationIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
-                    emailValidationIcon.style.color = '#28a745'; // Green
-                } else {
-                    // Email is already in use
-                    emailValidationIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
-                    emailValidationIcon.style.color = '#dc3545'; // Red
-                    emailError.textContent = 'This email is already registered.';
-                }
-            } catch (error) {
-                console.error("Error checking email availability:", error);
-                emailValidationIcon.style.display = 'none'; // Hide icon on error
-            }
+            return true;
         }
 
-        // --- Step Navigation Logic ---
-        function updateStepIndicator(step) {
-            step1Indicator.classList.toggle('active', step >= 1);
-            line1_2.classList.toggle('active', step > 1);
-            step2Indicator.classList.toggle('active', step >= 2);
-            line2_3.classList.toggle('active', step > 2);
-            step3Indicator.classList.toggle('active', step >= 3);
-        }
+        const registerForm = document.getElementById("registerForm");
 
-        function nextStep(currentStep) {
-            let isValid = true;
-            if (currentStep === 1) {
-                const email = document.getElementById('userEmail').value;
-                const password = document.getElementById('newPassword').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                if (!email || !password || !confirmPassword) {
-                    alert('Please fill in all account information fields.');
-                    isValid = false;
-                } else if (password.length < 8) {
-                    alert('Password must be at least 8 characters long.');
-                    isValid = false;
-                } else if (password !== confirmPassword) {
-                    alert('Passwords do not match.');
-                    isValid = false;
-                }
-                if (isValid) {
-                    step1.style.display = 'none';
-                    step2.style.display = 'block';
-                    updateStepIndicator(2);
-                }
-            } else if (currentStep === 2) {
-                const requiredFields = ['profession', 'ageRange', 'country', 'currency', 'incomeRange', 'cycleDate'];
-                for (const fieldId of requiredFields) {
-                    if (!document.getElementById(fieldId).value) {
-                        alert('Please fill in all required personal information fields.');
-                        isValid = false;
-                        break;
-                    }
-                }
-                if (isValid) {
-                    step2.style.display = 'none';
-                    step3.style.display = 'block';
-                    updateStepIndicator(3);
-                }
-            }
-        }
-
-        function previousStep(currentStep) {
-            if (currentStep === 2) {
-                step2.style.display = 'none';
-                step1.style.display = 'block';
-                updateStepIndicator(1);
-            } else if (currentStep === 3) {
-                step3.style.display = 'none';
-                step2.style.display = 'block';
-                updateStepIndicator(2);
-            }
-        }
-
-        // --- Category Logic ---
-        const defaultIncomeCategories = ["Salary", "Gift", "Bonus", "Interest", "Business Income", "Others"];
-        const defaultExpenseCategories = ["Food", "Transport", "Utilities", "Cash Withdraw", "Health", "Loans", "Clothing", "Household", "Savings", "Entertainment", "Others"];
-
-        function createCategoryCheckbox(category, type) {
-            const sanitizedCategory = category.replace(/[^a-zA-Z0-9]/g, '');
-            const col = document.createElement('div');
-            col.className = 'col-md-4';
-            const formCheck = document.createElement('div');
-            formCheck.className = 'form-check';
-            formCheck.innerHTML = `
-                <input class="form-check-input" type="checkbox" value="${category}" id="${type}-${sanitizedCategory}" checked>
-                <label class="form-check-label" for="${type}-${sanitizedCategory}">
-                    ${category}
-                </label>
-            `;
-            col.appendChild(formCheck);
-            return col;
-        }
-
-        function populateDefaultCategories() {
-            const incomeList = document.getElementById('incomeCategoriesList');
-            const expenseList = document.getElementById('expenseCategoriesList');
-            incomeList.innerHTML = '';
-            expenseList.innerHTML = '';
-            defaultIncomeCategories.forEach(cat => incomeList.appendChild(createCategoryCheckbox(cat, 'income')));
-            defaultExpenseCategories.forEach(cat => expenseList.appendChild(createCategoryCheckbox(cat, 'expense')));
-        }
-
-        function addCustomCategory(type) {
-            const inputId = type === 'income' ? 'customIncomeCategory' : 'customExpenseCategory';
-            const listId = type === 'income' ? 'incomeCategoriesList' : 'expenseCategoriesList';
-            const customList = type === 'income' ? customIncomeCategoriesState : customExpenseCategoriesState;
-            const defaultList = type === 'income' ? defaultIncomeCategories : defaultExpenseCategories;
-            const input = document.getElementById(inputId);
-            const categoryName = input.value.trim();
-
-            if (categoryName) {
-                const combinedList = [...defaultList, ...customList];
-                if (combinedList.some(cat => cat.toLowerCase() === categoryName.toLowerCase())) {
-                    alert('Category already exists.');
-                    return;
-                }
-                customList.push(categoryName);
-                document.getElementById(listId).appendChild(createCategoryCheckbox(categoryName, type));
-                input.value = '';
-            }
-        }
-
-        // --- Event Listeners ---
-        document.getElementById('nextStep1').addEventListener('click', () => nextStep(1));
-        document.getElementById('nextStep2').addEventListener('click', () => nextStep(2));
-        document.getElementById('prevStep2').addEventListener('click', () => previousStep(2));
-        document.getElementById('prevStep3').addEventListener('click', () => previousStep(3));
-        
-        document.getElementById('addIncomeCategoryBtn').addEventListener('click', () => addCustomCategory('income'));
-        document.getElementById('addExpenseCategoryBtn').addEventListener('click', () => addCustomCategory('expense'));
-
-        document.getElementById('vehicleOwned').addEventListener('change', (e) => {
-            document.getElementById('fuelTypeContainer').style.display = e.target.value === 'Yes' ? 'block' : 'none';
-        });
-
-        userEmailInput.addEventListener('blur', validateEmailUniqueness);
-
-        // --- Password Strength & Match Logic ---
-        const passwordInput = document.getElementById('newPassword');
-        const confirmPasswordInput = document.getElementById('confirmPassword');
-        const strengthBar = document.getElementById('passwordStrengthFill');
-        const strengthText = document.getElementById('passwordStrengthText');
-        const matchIcon = document.getElementById('passwordMatchIcon');
-
-        function checkPasswordStrength(pw) {
-            let score = 0;
-            if (pw.length >= 8) score++;
-            if (/[A-Z]/.test(pw)) score++;
-            if (/[a-z]/.test(pw)) score++;
-            if (/\d/.test(pw)) score++;
-            if (/[@$!%*?&#]/.test(pw)) score++;
-            return score;
-        }
-
-        function updateStrengthBar() {
-            const pw = passwordInput.value;
-            const score = checkPasswordStrength(pw);
-            let percent = (score / 5) * 100;
-            let color = "#e74c3c";
-            let text = "Weak";
-
-            if (score >= 5) { color = "#28a745"; text = "Strong"; } 
-            else if (score >= 3) { color = "#f1c40f"; text = "Medium"; }
-
-            strengthBar.style.width = percent + "%";
-            strengthBar.style.background = color;
-            strengthText.textContent = pw ? text : "";
-            strengthText.style.color = color;
-        }
-
-        function updatePasswordMatch() {
-            const pw = passwordInput.value;
-            const cpw = confirmPasswordInput.value;
-            if (pw && cpw && pw === cpw && checkPasswordStrength(pw) >= 3) {
-                matchIcon.style.display = "inline";
-            } else {
-                matchIcon.style.display = "none";
-            }
-        }
-
-        passwordInput.addEventListener('input', () => {
-            updateStrengthBar();
-            updatePasswordMatch();
-        });
-        confirmPasswordInput.addEventListener('input', updatePasswordMatch);
-
-        // --- Enable/disable Complete Registration button based on Terms checkbox ---
-        const acceptTerms = document.getElementById('acceptTerms');
-        const completeRegistrationBtn = document.getElementById('completeRegistrationBtn');
-        acceptTerms.addEventListener('change', () => {
-            completeRegistrationBtn.disabled = !acceptTerms.checked;
-        });
-
-        // --- Form Submission ---
-        registerForm.addEventListener('submit', async (e) => {
+        registerForm.addEventListener("submit", async function (e) {
             e.preventDefault();
             
-            const email = document.getElementById('userEmail').value;
-            const password = document.getElementById('newPassword').value;
+            if (!selectedUserType) {
+                showMessage('Please select a plan first', 'error');
+                showPlanSelectionModal();
+                return;
+            }
 
-            const submitButton = e.target.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Registering...';
+            if (!validatePasswords()) {
+                return;
+            }
+
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const country = document.getElementById("country").value;
+            const currency = document.getElementById("currency").value;
+
+            showLoading(true);
 
             try {
+                // Create user account
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
-                const selectedIncomeCategories = Array.from(document.querySelectorAll('#incomeCategoriesList .form-check-input:checked')).map(cb => cb.value);
-                const selectedExpenseCategories = Array.from(document.querySelectorAll('#expenseCategoriesList .form-check-input:checked')).map(cb => cb.value);
+                // Save user data to Firestore with user type
+                await setDoc(doc(db, "users", user.uid), {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    country: country,
+                    currency: currency,
+                    userType: selectedUserType, // Save the user type (Free or Pro)
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                    // Default categories
+                    selectedIncomeCategories: ["Salary", "Gift", "Bonus", "Interest", "Business Income", "Others"],
+                    selectedExpenseCategories: ["Food", "Transport", "Utilities", "Cash Withdraw", "Health", "Loans", "Clothing", "Household", "Savings", "Entertainment", "Others"],
+                    customIncomeCategories: [],
+                    customExpenseCategories: [],
+                    cycleDate: 10 // Default cycle date
+                });
 
-                const userData = {
-                    email: user.email,
-                    firstname: document.getElementById('firstname').value,
-                    lastname: document.getElementById('lastname').value,
-                    phone: document.getElementById('phone').value,
-                    profession: document.getElementById('profession').value,
-                    ageRange: document.getElementById('ageRange').value,
-                    country: document.getElementById('country').value,
-                    currency: document.getElementById('currency').value,
-                    incomeRange: document.getElementById('incomeRange').value,
-                    cycleDate: document.getElementById('cycleDate').value,
-                    civilStatus: document.getElementById('civilStatus').value,
-                    children: document.getElementById('children').value,
-                    livingType: document.getElementById('livingType').value,
-                    vehicleOwned: document.getElementById('vehicleOwned').value,
-                    fuelType: document.getElementById('fuelType').value,
-                    interests: document.getElementById('interests').value,
-                    selectedIncomeCategories,
-                    selectedExpenseCategories,
-                    customIncomeCategories: customIncomeCategoriesState,
-                    customExpenseCategories: customExpenseCategoriesState
-                };
-
-                await setDoc(doc(db, "users", user.uid), userData);
-
-                alert('Registration successful! Redirecting to login page.');
-                window.location.href = 'login.html';
-
+                showMessage(`Account created successfully with ${selectedUserType} plan!`, 'success');
+                
+                // Redirect after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+                
             } catch (error) {
-                console.error("Error during registration:", error);
-                alert(`Registration failed: ${error.message}`);
-                submitButton.disabled = false;
-                submitButton.innerHTML = '<i class="fas fa-user-plus"></i> Complete Registration';
+                const errorCode = error.code;
+                let errorMessage = "Registration failed. Please try again.";
+
+                if (errorCode === 'auth/email-already-in-use') {
+                    errorMessage = "Email address is already registered.";
+                } else if (errorCode === 'auth/invalid-email') {
+                    errorMessage = "Invalid email address format.";
+                } else if (errorCode === 'auth/weak-password') {
+                    errorMessage = "Password is too weak. Use at least 6 characters.";
+                }
+
+                console.error(error);
+                showMessage(errorMessage, 'error');
+            } finally {
+                showLoading(false);
             }
         });
 
-        // --- Initial Setup ---
-        populateDefaultCategories();
-        populateCountries();
-
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            checkURLParams();
+        });
     </script>
 </body>
 </html>
